@@ -1,3 +1,5 @@
+import { BudgetingForm } from '../../Components';
+
 import './index.css';
 
 const handleSubmit = e => {
@@ -6,10 +8,13 @@ const handleSubmit = e => {
 
 export const Main = () => {
         return (
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="input">Test</label>
-                <input type="text" id="input" name="input"></input>
-                <input type="submit"></input>
-            </form>
+            <div>
+                <BudgetingForm />
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="input">Test</label>
+                    <input type="text" id="input" name="input"></input>
+                    <input type="submit"></input>
+                </form>
+            </div>
         )
     }
