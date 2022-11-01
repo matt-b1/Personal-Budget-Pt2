@@ -1,0 +1,25 @@
+div #form {
+    text-align: center;
+}
+
+#form h1 {
+    margin: 15px;
+}
+
+.budgetForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.budgetForm>* {
+    display: grid;
+    grid-template-columns: 100px 200px;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.submit {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+}
