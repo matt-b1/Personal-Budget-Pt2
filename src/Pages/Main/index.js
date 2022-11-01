@@ -25,7 +25,7 @@ export const Main = () => {
         setErrMsg('');
     }, [user, pwd]);
 
-    console.log(user)
+    //console.log(user)
 
         return (
             <div id='form'>
