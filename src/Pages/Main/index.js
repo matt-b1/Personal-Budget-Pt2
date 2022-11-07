@@ -2,6 +2,7 @@ import { BudgetingForm } from '../../Components';
 
 import { useRef, useState, useEffect, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 import './index.css';
 
@@ -41,14 +42,17 @@ export const Main = () => {
 
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
-        setValidConfirmPwd(pwd === confirmPwd);
+        if (validPwd) {
+            setValidConfirmPwd(pwd === confirmPwd);
+        }
     }, [pwd, confirmPwd])
+
+    console.log(validUser);
+    console.log(validConfirmPwd);
 
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd]);
-
-    console.log(validUser);
 
     return (
         <div id='form'>
@@ -99,7 +103,7 @@ export const Main = () => {
                         required
                     />
                 </div>
-                <div class={!validPwd && !validConfirmPwd && (pwdFocus || confirmPwdFocus)?'show':'hide'}>
+                <div className={(!validPwd || !validConfirmPwd) && (pwdFocus || confirmPwdFocus)?'show':'hide'}>
                     <ul className='inputValidation'>
                         <li>8 to 24 characters</li>
                         <li>Must include 1 uppercase letter</li>
