@@ -11,6 +11,10 @@ div #form {
     flex-direction: column;
 }
 
+#detailsHeader {
+    display: block;
+}
+
 .budgetForm>* {
     display: grid;
     grid-template-columns: 150px 200px;

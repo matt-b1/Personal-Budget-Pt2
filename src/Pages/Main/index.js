@@ -26,6 +26,18 @@ export const Main = () => {
     const [validConfirmPwd, setValidConfirmPwd] = useState(false);
     const [confirmPwdFocus, setConfirmPwdFocus] = useState(false);
 
+    const [firstName, setFirstName] = useState('');
+    const [validFirstName, setValidFirstName] = useState(false);
+    const [firstNameFocus, setFirstNameFocus] = useState(false);
+
+    const [lastName, setLastName] = useState('');
+    const [validLastName, setValidLastName] = useState(false);
+    const [lastNameFocus, setLastNameFocus] = useState(false);
+
+    const [dateOfBirth, setDateOfBirth] = useState('');
+    const [validDateOfBirth, setValidDateOfBirth] = useState(false);
+    const [dateOfBirthFocus, setDateOfBirthFocus] = useState(false);
+
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
@@ -52,12 +64,20 @@ export const Main = () => {
         e.preventDefault();
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
-        if (!v1 || !v2) {
+        if (!v1 || !v2 || !firstName || !lastName || !dateOfBirth) {
             setErrMsg('Invalid Entry');
             return;
         }
         try {
-            const response = await axios.post(REGISTER_URL, JSON.stringify({ 'username' : user, 'password' : pwd }),
+            const response = await axios.post(REGISTER_URL, JSON.stringify({ 
+                'username' : user, 
+                'password' : pwd, 
+                'userInfo' : {
+                    'firstName': firstName,
+                    'lastName': lastName,
+                    'dateOfBirth': dateOfBirth
+                }
+            }),
             {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
@@ -79,7 +99,7 @@ export const Main = () => {
     return (
         <div id='form'>
             <BudgetingForm />
-            <h1> Login </h1>
+            <h1> Register    </h1>
             <form className="budgetForm" onSubmit={handleSubmit}>
                 <div className="username">
                     <label htmlFor="username"> Username: </label>
@@ -132,6 +152,43 @@ export const Main = () => {
                         <li>Must include 1 number</li>
                         <li>Must include a special character (!@#$%)</li>
                     </ul>
+                </div>
+                <h3 id="detailsHeader">Personal Details</h3>
+                <div className="firstName">
+                    <label htmlFor="firstName"> First name: </label>
+                    <input
+                        type="text"
+                        id="firstName"
+                        onChange={(e) => setFirstName(e.target.value)}
+                        value={firstName}
+                        onFocus = {() => setFirstNameFocus(true)}
+                        onBlur = {() => setFirstNameFocus(false)}
+                        required
+                    />
+                </div>
+                <div className="lastName">
+                    <label htmlFor="lastName"> Last name: </label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            onChange={(e) => setLastName(e.target.value)}
+                            value={lastName}
+                            onFocus = {() => setLastNameFocus(true)}
+                            onBlur = {() => setLastNameFocus(false)}
+                            required
+                        />
+                    </div>
+                <div className="dateOfBirth">
+                    <label htmlFor="dateofBirth"> Date of Birth: </label>
+                        <input
+                            type="text"
+                            id="dateOfBirth"
+                            onChange={(e) => setDateOfBirth(e.target.value)}
+                            value={dateOfBirth}
+                            onFocus = {() => setDateOfBirthFocus(true)}
+                            onBlur = {() => setDateOfBirthFocus(false)}
+                            required
+                        />
                 </div>
                 <div className="submit">
                     <input type="submit"></input>
