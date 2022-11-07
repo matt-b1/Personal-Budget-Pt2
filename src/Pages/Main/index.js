@@ -42,16 +42,13 @@ export const Main = () => {
         if (validPwd) {
             setValidConfirmPwd(pwd === confirmPwd);
         }
-    }, [pwd, confirmPwd])
-
-    console.log(validUser);
-    console.log(validConfirmPwd);
+    }, [pwd, validPwd, confirmPwd])
 
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd, confirmPwd]);
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
@@ -60,7 +57,7 @@ export const Main = () => {
             return;
         }
         try {
-            const response = await axios.post(REGISTER_URL, JSON.stringify({ user, pwd }),
+            const response = await axios.post(REGISTER_URL, JSON.stringify({ 'username' : user, 'password' : pwd }),
             {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true
@@ -75,7 +72,7 @@ export const Main = () => {
             } else {
                 setErrMsg('Registration Failed')
             }
-            errRef.current.focus();
+            //errRef.current.focus();
         }
     }
 
