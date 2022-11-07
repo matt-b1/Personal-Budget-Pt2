@@ -2,16 +2,13 @@ import { BudgetingForm } from '../../Components';
 
 import { useRef, useState, useEffect, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
+import axios from '../../Api/axios';
 
 import './index.css';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-
-const handleSubmit = e => {
-    e.preventDefault();
-}
+const REGISTER_URL = '/users';
 
 export const Main = () => {
     const userRef = useRef();
@@ -52,7 +49,35 @@ export const Main = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd]);
+    }, [user, pwd, confirmPwd]);
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        const v1 = USER_REGEX.test(user);
+        const v2 = PWD_REGEX.test(pwd);
+        if (!v1 || !v2) {
+            setErrMsg('Invalid Entry');
+            return;
+        }
+        try {
+            const response = await axios.post(REGISTER_URL, JSON.stringify({ user, pwd }),
+            {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
+            }
+          );
+          setSuccess(true);
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 409) {
+                setErrMsg('Username Taken');
+            } else {
+                setErrMsg('Registration Failed')
+            }
+            errRef.current.focus();
+        }
+    }
 
     return (
         <div id='form'>
