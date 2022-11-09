@@ -65,8 +65,8 @@ export const Login = () => {
                     autoComplete="off"
                     onChange={(e) => (e.target.value)}
                     value={user}
-                    onFocus={setUserFocus(true)}
-                    onBlur={setUserFocus(false)}
+                    onFocus={() => setUserFocus(true)}
+                    onBlur={() => setUserFocus(false)}
                     required
                 />
 
@@ -76,8 +76,8 @@ export const Login = () => {
                     id="password"
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
-                    onFocus={setPwdFocus(true)}
-                    onBlue={setPwdFocus(false)}
+                    onFocus={() => setPwdFocus(true)}
+                    onBlue={() => setPwdFocus(false)}
                     required
                 />
                 <button>Sign In</button>    
