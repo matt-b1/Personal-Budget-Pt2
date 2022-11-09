@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Register } from './Pages';
+import { Register, Login } from './Pages';
 
 function App() {
 

@@ -1,9 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
 import axios from '../../Api/axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './index.css';
 
-const Login = () => {
+export const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
 
@@ -39,17 +40,20 @@ const Login = () => {
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
-            } else if (err.response?.status === 409) {
-                setErrMsg('Username Taken');
-            } else {
+            } 
+            /*
+            else if (err.response?.status === 401) {
+                setErrMsg('Registration Failed');
+            } 
+            */ 
+            else {
                 setErrMsg('Registration Failed')
             }
-            //errRef.current.focus();
         }
     }
 
     return (
-        <section>
+        <div>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Sign In</h1>
             <form className="login" onSubmit={handleSubmit}>
@@ -61,6 +65,8 @@ const Login = () => {
                     autoComplete="off"
                     onChange={(e) => (e.target.value)}
                     value={user}
+                    onFocus={setUserFocus(true)}
+                    onBlur={setUserFocus(false)}
                     required
                 />
 
@@ -70,6 +76,8 @@ const Login = () => {
                     id="password"
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
+                    onFocus={setPwdFocus(true)}
+                    onBlue={setPwdFocus(false)}
                     required
                 />
                 <button>Sign In</button>    
@@ -80,8 +88,6 @@ const Login = () => {
                     <a href="#">Sign Up</a>
                 </span>
             </p>
-        </section>
+        </div>
     )
 }
-
-export default Login
