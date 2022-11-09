@@ -100,7 +100,7 @@ export const Register = () => {
         <div id='form'>
             <BudgetingForm />
             <h1> Register    </h1>
-            <form className="budgetForm" onSubmit={handleSubmit}>
+            <form className="registerForm" onSubmit={handleSubmit}>
                 <div className="username">
                     <label htmlFor="username"> Username: </label>
                     <input 
