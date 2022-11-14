@@ -1,10 +1,12 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useContext } from 'react';
+import AuthContext from '../../Api/context/AuthProvider';
 import axios from '../../Api/axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './index.css';
 
 export const Login = () => {
+    const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
 
