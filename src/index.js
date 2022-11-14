@@ -8,8 +8,8 @@ import { AuthProvider } from './Api/context/AuthProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-  <AuthProvider>
+    <AuthProvider>
       <App />
-  </AuthProvider>
+    </AuthProvider>
   </BrowserRouter>
 );

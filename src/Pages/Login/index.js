@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../Api/context/AuthProvider';
 import axios from '../../Api/axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,6 +20,8 @@ export const Login = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
+    const navigate = useNavigate();
+
     const LOGIN_URL = '/login';
     
     useEffect(() => {
@@ -29,16 +32,22 @@ export const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(LOGIN_URL, JSON.stringify({ 
-                'username' : user, 
-                'password' : pwd, 
-            }),
-            {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true
-            }
-          );
-          setSuccess(true);
+                const response = await axios.post(LOGIN_URL, JSON.stringify({ 
+                    'username' : user, 
+                    'password' : pwd, 
+                }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            const accessToken = response?.data?.accessToken;
+            setAuth({ user, pwd, accessToken });
+            setUser('');
+            setPwd('');
+            setErrMsg('');
+            setSuccess(true);
+            navigate('/budget', { replace: true });
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -49,7 +58,7 @@ export const Login = () => {
             } 
             */ 
             else {
-                setErrMsg('Registration Failed')
+                setErrMsg('Login Failed')
             }
         }
     }
@@ -65,7 +74,7 @@ export const Login = () => {
                     id="username"
                     ref={userRef}
                     autoComplete="off"
-                    onChange={(e) => (e.target.value)}
+                    onChange={(e) => setUser(e.target.value)}
                     value={user}
                     onFocus={() => setUserFocus(true)}
                     onBlur={() => setUserFocus(false)}
@@ -79,7 +88,7 @@ export const Login = () => {
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
                     onFocus={() => setPwdFocus(true)}
-                    onBlue={() => setPwdFocus(false)}
+                    onBlur={() => setPwdFocus(false)}
                     required
                 />
                 <button>Sign In</button>    
@@ -87,7 +96,7 @@ export const Login = () => {
             <p>
                 Need an Account?<br />
                 <span className='line'>
-                    <a href="#">Sign Up</a>
+                    <a href="/register">Sign Up</a>
                 </span>
             </p>
         </div>
