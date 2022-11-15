@@ -41,6 +41,7 @@ export const Login = () => {
                     withCredentials: true
                 }
             );
+            console.log(response);
             const accessToken = response?.data?.accessToken;
             setAuth({ user, pwd, accessToken });
             setUser('');
@@ -62,7 +63,6 @@ export const Login = () => {
             }
         }
     }
-
     return (
         <div>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
