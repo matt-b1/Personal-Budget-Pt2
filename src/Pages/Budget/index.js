@@ -1,30 +1,26 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react';
 
 import AuthContext from '../../Api/context/AuthProvider';
-import axios from '../../Api/axios';
+import { useState } from 'react';
+
+import { TestRefresh } from '../../Features/auth/refreshToken';
+
 
 export const Budget =  () => {
 
     const { auth } = useContext(AuthContext);
 
-    const [setTest, test] = useState(false);
+    const [test, setTest] = useState(false);
 
-    const testRefresh = async() => {
-        try {
-            const response = await axios.get('refresh', {});
-            console.log(response);
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    TestRefresh(test, setTest);
+    
+    //console.log(test);
 
-    testRefresh();
-            
-    if (Object.keys(auth).length === 0) {
+    if (!test) {
         return (
             <h1> YOU ARE NOT BILLY MANGO, GET OUT</h1>
         )
-    } else {
+    } else if (test) {
         return (    
             <div>
                 <h1>ELLO BILLY MANGO</h1>
