@@ -1,6 +1,6 @@
 import axios from '../../Api/axios';
 
-export const testRefresh = async(test, setTest) => {
+export const refresh = async(test, setTest) => {
     try {
         const response = await axios.get('/refresh', 
         {

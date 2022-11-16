@@ -1,5 +1,5 @@
 import { BudgetingForm } from '../../Components';
-
+import { useNavigate } from 'react-router-dom';
 import { useRef, useState, useEffect, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from '../../Api/axios';
@@ -13,6 +13,8 @@ const REGISTER_URL = '/users';
 export const Register = () => {
     const userRef = useRef();
     const errRef = useRef();
+
+    const navigate = useNavigate();
 
     const [user, setUser] = useState('');
     const [validUser, setValidUser] = useState(false);
@@ -84,6 +86,8 @@ export const Register = () => {
             }
           );
           setSuccess(true);
+          alert(`${user} successfully registered`);
+          navigate('/login');  
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');

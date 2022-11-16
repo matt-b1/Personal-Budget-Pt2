@@ -4,7 +4,7 @@ import AuthContext from '../../Api/context/AuthProvider';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { testRefresh } from '../../Features/auth/refreshToken';
+import { refresh } from '../../Features/auth/refresh';
 import { logout } from '../../Features/auth/logout';
 
 export const Budget =  () => {
@@ -13,7 +13,7 @@ export const Budget =  () => {
     const navigate = useNavigate();
     const [test, setTest] = useState(false);
 
-    testRefresh(test, setTest);
+    refresh(test, setTest);
 
     const handleLogout = (e) => {
         e.preventDefault();
