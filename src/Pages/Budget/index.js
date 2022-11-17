@@ -1,21 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import AuthContext from '../../Api/context/AuthProvider';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { refresh } from '../../Features/auth/refresh';
 import { logout } from '../../Features/auth/logout';
 
 export const Budget =  () => {
-    const { auth } = useContext(AuthContext);
+    const { auth, setAuth } = useContext(AuthContext);
     
     const navigate = useNavigate();
-    const [test, setTest] = useState(false);
 
     const user = auth.user;
 
-    refresh(test, setTest);
+    useEffect(() => {
+        refresh(setAuth);
+    }, [])
+
+    //console.log(auth);
 
     const handleLogout = (e) => {
         e.preventDefault();
@@ -23,11 +25,19 @@ export const Budget =  () => {
         navigate('/login', { replace: true });
     }
 
-    if (!test) {
+    useEffect(() => {
+        if (!user) {
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000)
+        }
+    },[])
+    
+    if (!user) {
         return (
-            <h1> YOU ARE NOT {user}, GET OUT</h1>
+            <h1>YOU ARE NOT BILLY MANGO</h1>
         )
-    } else if (test) {
+    } else if (user) {
         return (    
             <div>
                 <h1>ELLO {user}</h1>
