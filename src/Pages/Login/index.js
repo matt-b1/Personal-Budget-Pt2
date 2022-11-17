@@ -8,6 +8,7 @@ import './index.css';
 
 export const Login = () => {
     const { setAuth } = useContext(AuthContext);
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -41,7 +42,7 @@ export const Login = () => {
                     withCredentials: true
                 }
             );
-            console.log(response);
+            //console.log(response);
             const accessToken = response?.data?.accessToken;
             setAuth({ user, pwd, accessToken });
             setUser('');
