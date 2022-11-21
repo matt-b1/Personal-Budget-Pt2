@@ -6,8 +6,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './index.css';
 
+import { refresh } from '../../Features/auth/refresh';
+
 export const Login = () => {
-    const { auth, setAuth } = useContext(AuthContext);
+    const { setAuth } = useContext(AuthContext);
 
     const userRef = useRef();
     const errRef = useRef();
@@ -17,18 +19,21 @@ export const Login = () => {
 
     const [pwd, setPwd] = useState('');
     const [pwdFocus, setPwdFocus] = useState(false);
-
+    
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
-
+    
+    const [loading, setLoading] = useState(true);
+    
     const navigate = useNavigate();
 
     const LOGIN_URL = '/login';
     
     useEffect(() => {
+        refresh(setAuth, setLoading, navigate);
         userRef.current.focus();
         //console.log(auth);
-    }, [])
+    }, [setAuth, navigate])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

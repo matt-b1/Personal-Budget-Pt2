@@ -8,41 +8,34 @@ import { logout } from '../../Features/auth/logout';
 
 export const Budget =  () => {
     const { auth, setAuth } = useContext(AuthContext);
-    const [loadingState, setLoadingState] = useState(false);
+    
+    const [loading, setLoading] = useState(true);
     
     const navigate = useNavigate();
 
-    const user = auth.user;
-
     useEffect(() => {
-        refresh(setAuth);
-        setLoadingState(true);
-        //console.log(auth.user);
-    }, [])
+        refresh(setAuth, setLoading, navigate);
+    }, [auth, setAuth, navigate])
 
-    useEffect(() => { 
-         if (!auth.user && !loadingState) {
-            console.log(auth);
-            setTimeout(() => {
-                navigate('/login');
-            }, 2000)
-        }
-    }, [loadingState])
+    const user = auth.user;
     
-    console.log(auth);
     //console.log(auth.user);
 
     const handleLogout = (e) => {
         e.preventDefault();
         logout();
-        navigate('/login', { replace: true });
     }
 
-    if (!user) {
+    if (loading) {
+        return (
+            <></>
+        )
+    }
+    if (!user && !loading) {
         return (
             <h1>You are not logged in, please login</h1>
         )
-    } else if (user) {
+    } else if (user && !loading) {
         return (    
             <div>
                 <h1>Welcome {user}</h1>

@@ -1,9 +1,12 @@
 import { BudgetingForm } from '../../Components';
 import { useNavigate } from 'react-router-dom';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useContext, useState, useEffect } from 'react';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from '../../Api/axios';
 
+import AuthContext from '../../Api/context/AuthProvider';
+import { refresh } from '../../Features/auth/refresh';
 import './index.css';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
@@ -11,6 +14,8 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/users';
 
 export const Register = () => {
+    const { setAuth } = useContext(AuthContext);
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -43,9 +48,12 @@ export const Register = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
+        refresh(setAuth, setLoading, navigate);
         userRef.current.focus();
-    }, []);
+    }, [setAuth, navigate]);
 
     useEffect(() => {
         setValidUser(USER_REGEX.test(user));
@@ -99,7 +107,7 @@ export const Register = () => {
             //errRef.current.focus();
         }
     }
-
+    
     return (
         <div id='form'>
             <BudgetingForm />
