@@ -12,12 +12,14 @@ export const refresh = async(setAuth) => {
             //console.log(token);
             const decoded = jwt_decode(token);
             const user = decoded.UserInfo.username;
-            //console.log(decoded.UserInfo.username);
+            //console.log(user);
             setAuth({user, token});
+            //navigate('/budget', { replace: true });
         } else {
             console.log('Could not find refresh token');
         }
     } catch (err) {
         console.log(err);
+        //navigate('/login', { replace: true });
     }
 }

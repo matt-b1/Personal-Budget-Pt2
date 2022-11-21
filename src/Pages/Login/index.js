@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 export const Login = () => {
-    const { setAuth } = useContext(AuthContext);
+    const { auth, setAuth } = useContext(AuthContext);
 
     const userRef = useRef();
     const errRef = useRef();
@@ -27,8 +27,9 @@ export const Login = () => {
     
     useEffect(() => {
         userRef.current.focus();
+        //console.log(auth);
     }, [])
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
