@@ -33,7 +33,7 @@ export const Login = () => {
         refresh(setAuth, setLoading, navigate);
         userRef.current.focus();
         //console.log(auth);
-    }, [setAuth, navigate])
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

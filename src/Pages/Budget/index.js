@@ -15,7 +15,7 @@ export const Budget =  () => {
 
     useEffect(() => {
         refresh(setAuth, setLoading, navigate);
-    }, [auth, setAuth, navigate])
+    }, [auth])
 
     const user = auth.user;
     
@@ -24,6 +24,7 @@ export const Budget =  () => {
     const handleLogout = (e) => {
         e.preventDefault();
         logout();
+        navigate('/login');
     }
 
     if (loading) {
