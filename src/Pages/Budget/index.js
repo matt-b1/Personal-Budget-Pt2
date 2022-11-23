@@ -15,6 +15,10 @@ export const Budget =  () => {
     
     const navigate = useNavigate();
 
+    useEffect(() => {
+        refresh(setAuth, setLoading, navigate);
+    }, [auth])
+
     const user = auth.user;
 
     const handleLogout = (e) => {
