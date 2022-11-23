@@ -1,7 +1,7 @@
 import axios from '../../Api/axios';
 import jwt_decode from "jwt-decode";
 
-export const refresh = async(setAuth, setLoading, navigate) => {
+export const refresh = async(setAuth, setLoading) => {
     try {
         const response = await axios.get('/refresh', 
         {
@@ -15,17 +15,14 @@ export const refresh = async(setAuth, setLoading, navigate) => {
             //console.log(user);
             setAuth({user, token});
             setLoading(false);
-            navigate('/budget', { replace: true });
         } else {
             console.log('Could not find refresh token');
             setLoading(false);
-            navigate('/login', { replace: true });
         }
     } catch (err) {
         console.log(err);
         setLoading(false);
-        if (window.location.pathname === '/budget') {
-            navigate('/login', { replace: true });
+        
         }
     }
-}
+

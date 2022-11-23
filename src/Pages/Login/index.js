@@ -30,10 +30,10 @@ export const Login = () => {
     const LOGIN_URL = '/login';
     
     useEffect(() => {
-        refresh(setAuth, setLoading, navigate);
+        refresh(setAuth, setLoading);
         userRef.current.focus();
         //console.log(auth);
-    }, [setAuth, navigate])
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
