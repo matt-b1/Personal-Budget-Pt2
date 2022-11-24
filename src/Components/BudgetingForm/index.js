@@ -14,7 +14,7 @@ export const BudgetingForm = () => {
                 <label>Total income:
                     <input type="number"></input>
                 </label>
-                
+
             </form>
         </div>
         
