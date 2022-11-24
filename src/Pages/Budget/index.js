@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { refresh } from '../../Features/auth/refresh';
 import { logout } from '../../Features/auth/logout';
 
+import { BudgetingForm } from '../../Components';
+
 export const Budget =  () => {
     const { auth, setAuth } = useContext(AuthContext);
     
@@ -18,14 +20,20 @@ export const Budget =  () => {
     }, [auth])
 
     const user = auth.user;
-    
-    //console.log(auth.user);
 
     const handleLogout = (e) => {
         e.preventDefault();
-        logout();
-        navigate('/login');
+        logout(setAuth, navigate);
     }
+
+    useEffect(() => {
+        refresh(setAuth, setLoading);
+        if (!user) {
+            navigate('/login');
+        }
+    }, [])
+    
+    //console.log(auth.user);
 
     if (loading) {
         return (

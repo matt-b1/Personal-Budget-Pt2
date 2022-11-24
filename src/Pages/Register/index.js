@@ -51,9 +51,9 @@ export const Register = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        refresh(setAuth, setLoading, navigate);
+        refresh(setAuth, setLoading);
         userRef.current.focus();
-    }, [setAuth, navigate]);
+    }, []);
 
     useEffect(() => {
         setValidUser(USER_REGEX.test(user));
