@@ -13,6 +13,7 @@ export const refresh = async(setAuth, setLoading) => {
             const decoded = jwt_decode(token);
             const user = decoded.UserInfo.username;
             //console.log(user);
+            console.log('loop');
             setAuth({user, token});
             setLoading(false);
         } else {
