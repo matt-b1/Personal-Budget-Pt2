@@ -7,6 +7,7 @@ import { refresh } from '../../Features/auth/refresh';
 import { logout } from '../../Features/auth/logout';
 
 import { BudgetingForm } from '../../Components';
+import './index.css';
 
 export const Budget =  () => {
     const { auth, setAuth } = useContext(AuthContext);
@@ -46,7 +47,7 @@ export const Budget =  () => {
         )
     } else if (user && !loading) {
         return (    
-            <div>
+            <div id='budgetContent'>
                 <h1>Welcome {user}</h1>
                 <button onClick={handleLogout}>
                     Logout

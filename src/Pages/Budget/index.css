@@ -1,0 +1,14 @@
+#budgetContent {
+    margin: 20px;
+}
+
+.budgetGrid {
+    display: grid;
+    grid-template-columns: 200px;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+#budgetForm{
+    text-align: center;
+}
