@@ -1,4 +1,3 @@
-import { BudgetingForm } from '../../Components';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useContext, useState, useEffect } from 'react';
 
@@ -110,7 +109,6 @@ export const Register = () => {
     
     return (
         <div id='form'>
-            <BudgetingForm />
             <h1> Register    </h1>
             <form className="registerForm" onSubmit={handleSubmit}>
                 <div className="username">

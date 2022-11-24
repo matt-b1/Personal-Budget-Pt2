@@ -51,6 +51,7 @@ export const Budget =  () => {
                 <button onClick={handleLogout}>
                     Logout
                 </button>
+                <BudgetingForm />
             </div>
         )
     }

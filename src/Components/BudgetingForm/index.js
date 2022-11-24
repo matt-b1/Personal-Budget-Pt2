@@ -19,7 +19,7 @@ export const BudgetingForm = () => {
             <h2>Expenses:</h2>
         </div>
         <div>
-            <h3>ُEssentials:</h3>
+            <h3>Essentials:</h3>
             <label htmlFor='monthlyRent'>Monthly Rent
               <input 
               id='monthlyRent' 
@@ -33,14 +33,14 @@ export const BudgetingForm = () => {
             </label>
         </div>
         <div>
-            <h3>ُBills:</h3>
+            <h3>Bills:</h3>
             
         </div>
         <div>
-            <h3>ُTransport:</h3>
+            <h3>Transport:</h3>
         </div>
         <div>
-            <h3>ُChildcare:</h3>
+            <h3>Childcare:</h3>
         </div>
       </div>   
         
